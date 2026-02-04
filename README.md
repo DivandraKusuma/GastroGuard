@@ -25,7 +25,7 @@ One of our key features is accurate nutrient density calculation. To guarantee t
 
 **Total Calories = Sum (Weight × (Calorie Density / 100))**
 
-Where **Weight** is the estimated weight of the food component and **Calorie Density** is the energy density per 100 grams sourced directly from **FatSecret**.
+Where **Weight** is the estimated weight of the food component and **Calorie Density** is the energy density per 100 grams from verified databases.
 
 ## Challenges we ran into
 The biggest challenge we faced was **"The Quota Wall"**.
@@ -51,8 +51,6 @@ Our journey has just begun. Here is our roadmap:
 *   **Community:** Adding social features where users can share healthy recipes and achievements.
 *   **Premium Tier:** Access the Gemini Ultra model without quota limits for deeper micronutrient analysis.
 
-GastroGuard is not just about counting calories; it's about guarding your health's future, one bite at a time.
-
 ## Built with
 - **React** (Frontend Framework)
 - **TypeScript** (Programming Language)
@@ -63,3 +61,64 @@ GastroGuard is not just about counting calories; it's about guarding your health
 - **FatSecret API** (Verified Nutritional Database)
 - **CSS3** (Custom Styling)
 - **Axios/Fetch** (API Consumption)
+
+## Getting Started
+
+Follow these instructions to set up the project locally.
+
+### Prerequisites
+*   Node.js (v18 or higher)
+*   Python (v3.8 or higher)
+*   Google Gemini API Key
+*   FatSecret API Key (Optional, for better accuracy)
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/DivandraKusuma/GastroGuard.git
+    cd GastroGuard
+    ```
+
+2.  **Frontend Setup**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Backend Setup**
+    Open a new terminal and navigate to the backend directory:
+    ```bash
+    cd backend
+    pip install -r requirements.txt
+    ```
+
+4.  **Environment Variables**
+    Create a `.env` file in the `backend/` directory:
+    ```env
+    GEMINI_API_KEY=your_google_gemini_api_key
+    FATSECRET_CLIENT_ID=your_fatsecret_id (optional)
+    FATSECRET_CLIENT_SECRET=your_fatsecret_limit (optional)
+    ```
+
+### Running the Application
+
+1.  **Start the Backend**
+    In your backend terminal:
+    ```bash
+    python app.py
+    ```
+    The server will start on `http://127.0.0.1:5000`.
+
+2.  **Start the Frontend**
+    In your root terminal:
+    ```bash
+    npm run dev
+    ```
+    The application will run on `http://localhost:3000` (or the port shown in your terminal).
+
+3.  **Usage**
+    *   Open your browser and navigate to the frontend URL.
+    *   Click on "Lunch" or any meal to start the chatbot.
+    *   Type a food name or upload an image to analyze nutrition.
