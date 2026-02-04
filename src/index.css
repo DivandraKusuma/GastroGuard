@@ -1,0 +1,208 @@
+:root {
+  /* Color Palette - GastroGuard */
+  --color-primary: #4ECDC4;
+  /* Soft Mint Green */
+  --color-primary-dark: #3DBDB4;
+  --color-secondary: #FF6B6B;
+  /* Soft Red for alerts/cancel */
+  --color-accent: #FFE66D;
+  /* Soft Yellow/Gold */
+
+  --color-bg-app: #F7F9FC;
+  /* Very light grey/blue tint for app bg */
+  --color-bg-card: #FFFFFF;
+
+  --color-text-main: #2D3436;
+  --color-text-muted: #636E72;
+  --color-text-light: #B2BEC3;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4ECDC4 0%, #556270 100%);
+  /* Example, tweak for Mint */
+  --gradient-mint: linear-gradient(135deg, #4ECDC4 0%, #2BC0E4 100%);
+
+  /* Shadows */
+  --shadow-soft: 0 10px 20px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.02);
+  --shadow-float: 0 20px 40px rgba(78, 205, 196, 0.2);
+
+  /* Typography */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-app);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Mobile Container Utility */
+#root {
+  max-width: 480px;
+  /* Mobile app constraint */
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--color-bg-card);
+  position: relative;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Component: Buttons */
+.btn {
+  border: none;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+/* Typography Utilities */
+.h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.body-sm {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+/* Card Utilities */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Form Elements */
+.input-field {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  font-size: 16px;
+  margin-bottom: 16px;
+  transition: 0.2s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: white;
+}
+
+/* Utility Flex */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
