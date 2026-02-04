@@ -15,11 +15,11 @@ Its core workflow is designed for speed and ease:
 5.  **Report:** Within seconds, the user receives a comprehensive nutritional report along with personalized health advice.
 
 ## How we built it
-The heart of GastroGuard is **Gemini 3 Pro**, the latest AI model that enables deep multimodal context understanding. We built this application with a user-centric architecture:
+The heart of GastroGuard is **Gemini 2.5 Flash**, the latest AI model that enables deep multimodal context understanding. We built this application with a user-centric architecture:
 
 *   **Frontend:** React Native/Web with an intuitive chat interface.
 *   **Backend:** Python Flask managing business logic and AI orchestration.
-*   **Core Engine:** **Gemini 3 Pro** integration for vision processing (food images) and natural language understanding (text/voice).
+*   **Core Engine:** **Gemini 2.5 Flash** integration for vision processing (food images) and natural language understanding (text/voice).
 
 One of our key features is accurate nutrient density calculation. To guarantee this precision, we integrate the **FatSecret API**, ensuring all nutritional data is sourced from a globally recognized and accurate food database. We use the following formula to ensure every recorded calorie matches real-world portions:
 
@@ -32,7 +32,7 @@ The biggest challenge we faced was **"The Quota Wall"**.
 During early development, we relied heavily on the **Free Gemini AI Quota**. However, due to the complexity of multimodal analysis (especially image processing), we frequently hit API Rate Limits very quickly. The application often became unresponsive in the middle of demos.
 
 ## ⚠️ IMPORTANT NOTE: API LIMITS
-**Please Note:** This prototype relies on the **Gemini 3 Pro Free Tier API**. 
+**Please Note:** This prototype relies on the **Gemini 2.5 Flash Free Tier API**. 
 If you encounter errors (like "Server Error" or "Quota Exceeded"), it is likely due to the rate limits of the free API key. Please wait a moment and try again. We appreciate your understanding!
 
 ## Built with
