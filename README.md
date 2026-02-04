@@ -15,7 +15,7 @@ Its core workflow is designed for speed and ease:
 5.  **Report:** Within seconds, the user receives a comprehensive nutritional report along with personalized health advice.
 
 ## How we built it
-The heart of GastroGuard is **Gemini 2.5 Flash**, the latest AI model that enables deep multimodal context understanding. We built this application with a user-centric architecture:
+The heart of GastroGuard is **Gemini 2.5 Flash**, the free AI model that enables deep multimodal context understanding. We built this application with a user-centric architecture:
 
 *   **Frontend:** React Native/Web with an intuitive chat interface.
 *   **Backend:** Python Flask managing business logic and AI orchestration.
