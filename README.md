@@ -31,46 +31,23 @@ Where **Weight** is the estimated weight of the food component and **Calorie Den
 The biggest challenge we faced was **"The Quota Wall"**.
 During early development, we relied heavily on the **Free Gemini AI Quota**. However, due to the complexity of multimodal analysis (especially image processing), we frequently hit API Rate Limits very quickly. The application often became unresponsive in the middle of demos.
 
-We had to execute a **Technical Pivot** to solve this without sacrificing intelligence:
-1.  **Smart Caching:** We implemented a *response caching* system for common food queries (e.g., "Fried Rice" doesn't need to be re-analyzed every time).
-2.  **Efficient Prompt Engineering:** We streamlined our *system prompts* to reduce the number of tokens processed per request while maintaining JSON output accuracy.
-3.  **Fallback Mechanism:** If the main AI quota is exhausted or latency is too high, the system automatically switches to a local database-based estimation mode to ensure users can still log their meals.
-
-## Accomplishments that we're proud of
-*   **Seamless Multimodal Experience:** Successfully integrated image and voice inputs so users can log meals in under 5 seconds.
-*   **Context-Aware Analysis:** Our AI doesn't just count calories; it provides safety warnings (like "Warning: Spicy!") for users with sensitive stomachs.
-*   **Premium UI/UX:** Created a clean, responsive interface that feels "premium," encouraging users to keep interacting with the app.
-
-## What we learned
-This project taught us that **sometimes, "less is more"**.
-When dealing with *resource-constrained APIs* like the Gemini Free Tier, we learned to be efficient. Not every query requires the full power of the largest model. We learned to balance the accuracy of heavy AI models with the response speed users demand. Furthermore, we learned that building a chatbot isn't about how smartly the bot answers, but how comfortable the user feels talking to it.
-
-## What's next for GastroGuard
-Our journey has just begun. Here is our roadmap:
-*   **IoT Integration:** Connecting GastroGuard with smart scales or wearables for real-time health data.
-*   **Community:** Adding social features where users can share healthy recipes and achievements.
-*   **Premium Tier:** Access the Gemini Ultra model without quota limits for deeper micronutrient analysis.
+## ⚠️ IMPORTANT NOTE: API LIMITS
+**Please Note:** This prototype relies on the **Gemini 3 Pro Free Tier API**. 
+If you encounter errors (like "Server Error" or "Quota Exceeded"), it is likely due to the rate limits of the free API key. Please wait a moment and try again. We appreciate your understanding!
 
 ## Built with
 - **React** (Frontend Framework)
 - **TypeScript** (Programming Language)
 - **Vite** (Build Tool)
-- **Python** (Backend Language)
-- **Flask** (Micro web framework)
-- **Google Gemini API** (For Gemini 3 Pro & 2.5 Flash Models)
-- **FatSecret API** (Verified Nutritional Database)
 - **CSS3** (Custom Styling)
 - **Axios/Fetch** (API Consumption)
 
 ## Getting Started
 
-Follow these instructions to set up the project locally.
+This repository contains the **Frontend Client** for GastroGuard. It is configured to connect to our live backend server.
 
 ### Prerequisites
 *   Node.js (v18 or higher)
-*   Python (v3.8 or higher)
-*   Google Gemini API Key
-*   FatSecret API Key (Optional, for better accuracy)
 
 ### Installation
 
@@ -80,45 +57,24 @@ Follow these instructions to set up the project locally.
     cd GastroGuard
     ```
 
-2.  **Frontend Setup**
+2.  **Install Dependencies**
     ```bash
     npm install
     # or
     yarn install
     ```
 
-3.  **Backend Setup**
-    Open a new terminal and navigate to the backend directory:
-    ```bash
-    cd backend
-    pip install -r requirements.txt
-    ```
-
-4.  **Environment Variables**
-    Create a `.env` file in the `backend/` directory:
-    ```env
-    GEMINI_API_KEY=your_google_gemini_api_key
-    FATSECRET_CLIENT_ID=your_fatsecret_id (optional)
-    FATSECRET_CLIENT_SECRET=your_fatsecret_limit (optional)
-    ```
-
 ### Running the Application
 
-1.  **Start the Backend**
-    In your backend terminal:
-    ```bash
-    python app.py
-    ```
-    The server will start on `http://127.0.0.1:5000`.
-
-2.  **Start the Frontend**
-    In your root terminal:
+1.  **Start the Frontend**
+    In your terminal:
     ```bash
     npm run dev
     ```
     The application will run on `http://localhost:3000` (or the port shown in your terminal).
 
-3.  **Usage**
+2.  **Usage**
     *   Open your browser and navigate to the frontend URL.
+    *   The app will automatically connect to our backend server.
     *   Click on "Lunch" or any meal to start the chatbot.
     *   Type a food name or upload an image to analyze nutrition.

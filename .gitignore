@@ -10,3 +10,4 @@ __pycache__/
 android/
 ios/
 .agent/
+backend/
