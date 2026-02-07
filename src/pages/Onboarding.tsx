@@ -28,7 +28,6 @@ export default function Onboarding() {
     activityLevel: 'moderate' as ActivityLevel
   });
 
-
   const handleNext = () => {
     // Validation
     if (step === 1 && !formData.name.trim()) {
