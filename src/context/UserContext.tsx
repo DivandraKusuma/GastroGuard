@@ -216,6 +216,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 
 
+
+        if (DEMO_MODE) return; // Skip DB update in Demo Mode
+
         const dbData = {
             user_id: userId,
             updated_at: new Date(),
