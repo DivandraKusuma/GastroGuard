@@ -148,7 +148,7 @@ export default function Chat() {
             setIsRecording(true);
             recognitionRef.current.start();
         } else {
-            alert("Browser tidak mendukung fitur suara");
+            alert("Browser does not support voice features.");
         }
     };
 
@@ -257,7 +257,7 @@ export default function Chat() {
                 // Chat Response
                 const response: Message = {
                     id: Date.now() + 1,
-                    text: data.reply || "Maaf, saya kurang mengerti.",
+                    text: data.reply || "Sorry, I didn't quite catch that.",
                     sender: 'ai'
                 };
                 setMessages(prev => [...prev, response]);
@@ -268,7 +268,7 @@ export default function Chat() {
             setIsScanning(false);
             setMessages(prev => [...prev, {
                 id: Date.now(),
-                text: "Tidak dapat terhubung ke server.",
+                text: "Unable to connect to server.",
                 sender: 'ai'
             }]);
         }
