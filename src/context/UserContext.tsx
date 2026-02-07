@@ -101,9 +101,26 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [userId, setUserId] = useState<string | null>(null);
     const [authLoading, setAuthLoading] = useState(true);
 
+    // -------------------------------------------------------------
+    // DEMO MODE CONFIGURATION
+    // Set this to TRUE for Hackathon Video recording (Bypasses Login)
+    const DEMO_MODE = true;
+    // -------------------------------------------------------------
+
     // 1. Handle Supabase Auth Session
     useEffect(() => {
         let mounted = true;
+
+        if (DEMO_MODE) {
+            // MOCK LOGIN FOR DEMO
+            console.log("DEMO MODE ACTIVE: Bypassing Auth");
+            const mockSession = { user: { id: 'demo-user-123', email: 'demo@gastroguard.com' } } as Session;
+            setSession(mockSession);
+            setUserId('demo-user-123');
+            setAuthLoading(false);
+            // Don't subscribe to auth changes in demo mode
+            return;
+        }
 
         supabase.auth.getSession().then(({ data: { session } }) => {
             if (mounted) {
