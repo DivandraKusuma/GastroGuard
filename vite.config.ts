@@ -58,9 +58,9 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:5000',
+        target: 'https://rantog-gastroguardbackend.hf.space',
         changeOrigin: true,
-        secure: false,
+        secure: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
