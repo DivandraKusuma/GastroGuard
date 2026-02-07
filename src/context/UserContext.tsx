@@ -104,7 +104,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // -------------------------------------------------------------
     // DEMO MODE CONFIGURATION
     // Set this to TRUE for Hackathon Video recording (Bypasses Login)
-    // Set this to FALSE for real Production/GitHub usage
     const DEMO_MODE = true;
     // -------------------------------------------------------------
 
@@ -119,6 +118,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setSession(mockSession);
             setUserId('demo-user-123');
             setAuthLoading(false);
+            // Don't subscribe to auth changes in demo mode
             return;
         }
 
@@ -231,6 +231,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         setUser(prev => ({ ...prev, ...data }));
 
+
+
+
         if (DEMO_MODE) return; // Skip DB update in Demo Mode
 
         const dbData = {
@@ -256,6 +259,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (!userId) return;
 
         setDailyStats(prev => ({ ...prev, ...data }));
+
+
+
 
         if (DEMO_MODE) return; // Skip DB update in Demo Mode
 

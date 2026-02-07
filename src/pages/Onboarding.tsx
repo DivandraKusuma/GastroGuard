@@ -28,7 +28,27 @@ export default function Onboarding() {
     activityLevel: 'moderate' as ActivityLevel
   });
 
+
+  const [toast, setToast] = useState({ visible: false, message: '' });
+
+  const showToast = (msg: string) => {
+    setToast({ visible: true, message: msg });
+    setTimeout(() => setToast({ visible: false, message: '' }), 3000);
+  };
+
   const handleNext = () => {
+    // Validation
+    if (step === 1 && !formData.name.trim()) {
+      showToast("Please enter your name.");
+      return;
+    }
+    if (step === 3) {
+      if (!formData.height || !formData.weight || !formData.birthDate || !formData.targetWeight) {
+        showToast("Please fill in all body stats.");
+        return;
+      }
+    }
+
     if (step < 4) setStep(step + 1);
     else handleSubmit();
   };
@@ -201,41 +221,132 @@ export default function Onboarding() {
         {step === 4 && renderStep4()}
       </div>
 
-      <button className="btn btn-primary" style={{ width: '100%' }} onClick={handleNext}>
-        {step === 4 ? 'Complete Setup' : 'Continue'} <ChevronRight size={20} />
-      </button>
+      <div style={{ display: 'flex', gap: '12px' }}>
+        {step > 1 && (
+          <button
+            className="btn"
+            style={{ width: '48px', padding: 0, justifyContent: 'center', background: '#F1F5F9', color: '#64748B' }}
+            onClick={() => setStep(step - 1)}
+          >
+            <ChevronRight size={20} style={{ transform: 'rotate(180deg)' }} />
+          </button>
+        )}
+        <button className="btn btn-primary" style={{ flex: 1 }} onClick={handleNext}>
+          {step === 4 ? 'Complete Setup' : 'Continue'} <ChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Custom Toast Notification */}
+      {toast.visible && (
+        <div className="animate-fade-in" style={{
+          position: 'fixed',
+          top: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: '#FEF2F2', border: '1px solid #FECACA', color: '#B91C1C',
+          padding: '12px 24px', borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          zIndex: 1000, fontWeight: 500, fontSize: '14px',
+          display: 'flex', alignItems: 'center', gap: '8px'
+        }}>
+          ⚠️ {toast.message}
+        </div>
+      )}
 
       <style>{`
-        .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        /* --- Modern Onboarding Styles --- */
+        .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         
         .goal-card {
           border: 1px solid #E2E8F0;
-          background: white;
-          border-radius: 12px;
-          padding: 16px 8px;
-          font-size: 13px;
+          background: #FFFFFF;
+          border-radius: 16px;
+          padding: 24px 12px;
+          font-size: 14px;
           color: var(--color-text-muted);
           cursor: pointer;
-          transition: 0.2s;
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .goal-card.active { border-color: var(--color-primary); background: #F0FDFA; color: var(--color-primary-dark); font-weight: 600; }
+        .goal-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .goal-card.active { 
+          border-color: var(--color-primary); 
+          background: #F0FDFA; 
+          color: var(--color-primary-dark); 
+          font-weight: 600; 
+          box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
         
         .btn-select {
-          padding: 12px; border-radius: 12px; border: 1px solid #E2E8F0; background: white; cursor: pointer;
+          padding: 16px; 
+          border-radius: 16px; 
+          border: 1px solid #E2E8F0; 
+          background: #FFFFFF; 
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.2s ease;
+          color: var(--color-text-body);
         }
-        .btn-select.active { border-color: var(--color-primary); background: #F0FDFA; color: var(--color-primary-dark); font-weight: 600; }
+        .btn-select:hover { background: #F8FAFC; border-color: #CBD5E1; }
+        .btn-select.active { 
+          border-color: var(--color-primary); 
+          background: #F0FDFA; 
+          color: var(--color-primary-dark); 
+          font-weight: 600; 
+          box-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
+        }
         
         .activity-card {
            display: flex; align-items: center; gap: 16px;
-           padding: 16px;
-           background: white;
+           padding: 20px;
+           background: #FFFFFF;
            border: 1px solid #E2E8F0;
-           border-radius: 16px;
+           border-radius: 20px;
            cursor: pointer;
-           transition: 0.2s;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           position: relative;
+           overflow: hidden;
         }
-        .activity-card.active { border-color: var(--color-primary); box-shadow: var(--shadow-soft); transform: scale(1.02); }
-        .icon-box { width: 40px; height: 40px; background: #F1F5F9; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .activity-card:hover { border-color: var(--color-primary-light); background: #F8FAFC; }
+        .activity-card.active { 
+          border-color: var(--color-primary); 
+          background: #F0FDFA;
+          box-shadow: 0 8px 20px -4px rgba(13, 148, 136, 0.15); 
+          transform: scale(1.02); 
+        }
+        
+        .icon-box { 
+          width: 48px; height: 48px; 
+          background: #F1F5F9; 
+          border-radius: 14px; 
+          display: flex; align-items: center; justify-content: center; 
+          font-size: 24px;
+          transition: 0.3s;
+        }
+        .activity-card.active .icon-box { background: #CCFBF1; }
+
+        /* Input Enhancements */
+        .input-field {
+          width: 100%;
+          padding: 16px;
+          border-radius: 14px;
+          border: 1px solid #E2E8F0;
+          background: #F8FAFC;
+          font-size: 16px;
+          transition: 0.3s;
+          outline: none;
+        }
+        .input-field:focus {
+          border-color: var(--color-primary);
+          background: #FFFFFF;
+          box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+        }
+        
+        /* Typography spacer */
+        .label { margin-bottom: 8px; display: block; font-weight: 500; color: var(--color-text-header); }
+
       `}</style>
     </div>
   );

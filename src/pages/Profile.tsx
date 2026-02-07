@@ -1,9 +1,9 @@
 import React from 'react';
 import { useUser } from '../context/UserContext';
-import { Settings, LogOut } from 'lucide-react';
+import { Settings, LogOut, Edit3 } from 'lucide-react';
 
 export default function Profile() {
-  const { user, logout } = useUser();
+  const { user, logout, updateUser } = useUser();
 
   const handleLogout = async () => {
     if (confirm("Are you sure you want to log out?")) {
@@ -46,6 +46,17 @@ export default function Profile() {
           )) : <span className="body-sm">None listed</span>}
         </div>
       </div>
+
+      <button
+        className="btn btn-outline"
+        style={{ width: '100%', marginBottom: '12px', borderColor: '#0D9488', color: '#0D9488', background: '#F0FDFA' }}
+        onClick={() => {
+          updateUser({ isOnboarded: false });
+          setTimeout(() => window.location.href = '/onboarding', 100);
+        }}
+      >
+        <Edit3 size={18} /> Update Profile Data
+      </button>
 
       <button className="btn btn-outline" style={{ width: '100%', borderColor: '#FF6B6B', color: '#FF6B6B' }} onClick={handleLogout}>
         <LogOut size={18} /> Log Out
