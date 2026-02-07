@@ -245,6 +245,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 
 
+
+        if (DEMO_MODE) return; // Skip DB update in Demo Mode
+
         const today = new Date().toISOString().split('T')[0];
         const currentLog = { ...dailyStats, ...data };
 
