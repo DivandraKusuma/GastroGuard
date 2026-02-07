@@ -104,7 +104,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // -------------------------------------------------------------
     // DEMO MODE CONFIGURATION
     // Set this to TRUE for Hackathon Video recording (Bypasses Login)
-    const DEMO_MODE = true;
+    const DEMO_MODE = false;
     // -------------------------------------------------------------
 
     // 1. Handle Supabase Auth Session
