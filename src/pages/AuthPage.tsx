@@ -64,15 +64,23 @@ export default function AuthPage() {
                     password
                 });
                 if (error) throw error;
-                navigate('/onboarding');
+                navigate('/');
             } else {
                 // 4. Register
-                const { error } = await supabase.auth.signUp({
+                const { data, error } = await supabase.auth.signUp({
                     email,
                     password
                 });
                 if (error) throw error;
-                navigate('/onboarding');
+
+                // Check if email verification is required
+                if (data.user && !data.session) {
+                    setSuccessMSG('Sign up successful! Please check your email for the verification link.');
+                    setIsLogin(true); // Switch to login mode
+                    return;
+                }
+
+                navigate('/');
             }
         } catch (err: any) {
             setErrorMSG(err.message || 'Authentication failed');

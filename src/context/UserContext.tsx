@@ -137,6 +137,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         if (!userId) return;
 
+        setAuthLoading(true); // Start loading while we fetch profile
+
         const fetchData = async () => {
             try {
                 // Fetch Profile

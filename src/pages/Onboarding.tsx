@@ -4,9 +4,16 @@ import { useUser, UserGoal, ActivityLevel, Gender } from '../context/UserContext
 import { ChevronRight, Heart, Activity, User, Check } from 'lucide-react';
 
 export default function Onboarding() {
-  const { updateUser } = useUser();
+  const { user, updateUser } = useUser();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+
+  // If already onboarded, redirect to Dashboard
+  React.useEffect(() => {
+    if (user.isOnboarded) {
+      navigate('/', { replace: true });
+    }
+  }, [user.isOnboarded]);
 
   const [formData, setFormData] = useState({
     name: '',

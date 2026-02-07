@@ -3,12 +3,14 @@ import { useUser } from '../context/UserContext';
 import { Settings, LogOut } from 'lucide-react';
 
 export default function Profile() {
-  const { user, updateUser } = useUser();
+  const { user, logout } = useUser();
 
-  const handleLogout = () => {
-    if (confirm("Reset all data and start over?")) {
-      localStorage.removeItem('gastroUser');
-      window.location.reload();
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to log out?")) {
+      await logout();
+      // Supabase auth state change will trigger context update
+      // But we can also force a reload or navigate if needed
+      window.location.href = '/';
     }
   };
 
@@ -46,7 +48,7 @@ export default function Profile() {
       </div>
 
       <button className="btn btn-outline" style={{ width: '100%', borderColor: '#FF6B6B', color: '#FF6B6B' }} onClick={handleLogout}>
-        <LogOut size={18} /> Reset App Data
+        <LogOut size={18} /> Log Out
       </button>
 
       <style>{`
