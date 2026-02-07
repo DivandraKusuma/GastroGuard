@@ -28,15 +28,23 @@ export default function Onboarding() {
     activityLevel: 'moderate' as ActivityLevel
   });
 
+
+  const [toast, setToast] = useState({ visible: false, message: '' });
+
+  const showToast = (msg: string) => {
+    setToast({ visible: true, message: msg });
+    setTimeout(() => setToast({ visible: false, message: '' }), 3000);
+  };
+
   const handleNext = () => {
     // Validation
     if (step === 1 && !formData.name.trim()) {
-      alert("Please enter your name.");
+      showToast("Please enter your name.");
       return;
     }
     if (step === 3) {
       if (!formData.height || !formData.weight || !formData.birthDate || !formData.targetWeight) {
-        alert("Please fill in all body stats.");
+        showToast("Please fill in all body stats.");
         return;
       }
     }
@@ -213,9 +221,35 @@ export default function Onboarding() {
         {step === 4 && renderStep4()}
       </div>
 
-      <button className="btn btn-primary" style={{ width: '100%' }} onClick={handleNext}>
-        {step === 4 ? 'Complete Setup' : 'Continue'} <ChevronRight size={20} />
-      </button>
+      <div style={{ display: 'flex', gap: '12px' }}>
+        {step > 1 && (
+          <button
+            className="btn"
+            style={{ width: '48px', padding: 0, justifyContent: 'center', background: '#F1F5F9', color: '#64748B' }}
+            onClick={() => setStep(step - 1)}
+          >
+            <ChevronRight size={20} style={{ transform: 'rotate(180deg)' }} />
+          </button>
+        )}
+        <button className="btn btn-primary" style={{ flex: 1 }} onClick={handleNext}>
+          {step === 4 ? 'Complete Setup' : 'Continue'} <ChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Custom Toast Notification */}
+      {toast.visible && (
+        <div className="animate-fade-in" style={{
+          position: 'fixed',
+          top: '24px', left: '50%', transform: 'translateX(-50%)',
+          background: '#FEF2F2', border: '1px solid #FECACA', color: '#B91C1C',
+          padding: '12px 24px', borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          zIndex: 1000, fontWeight: 500, fontSize: '14px',
+          display: 'flex', alignItems: 'center', gap: '8px'
+        }}>
+          ⚠️ {toast.message}
+        </div>
+      )}
 
       <style>{`
         /* --- Modern Onboarding Styles --- */
