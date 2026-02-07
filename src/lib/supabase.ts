@@ -1,10 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Fallback for Demo Mode (Judge usage without .env)
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-key';
 
 if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Missing Supabase URL or Key in environment variables');
+    console.warn('Running with placeholder Supabase credentials. Auth will not work unless DEMO_MODE is active.');
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
