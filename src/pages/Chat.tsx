@@ -239,7 +239,21 @@ export default function Chat() {
 
             if (isFoodResult) {
                 // Food Analysis Response - Use AI's natural language reply!
-                const responseText = data.reply || `I found **${data.food_name}** (~${data.calories} kcal).`;
+                let responseText = data.reply;
+
+                if (!responseText) {
+                    // Manual Fallback Construction (Natural Language)
+                    responseText = `I found **${data.food_name}** (~${data.calories} kcal).`;
+
+                    const macros = [];
+                    if (data.protein) macros.push(`${data.protein}g protein`);
+                    if (data.carbs) macros.push(`${data.carbs}g carbs`);
+                    if (data.fat) macros.push(`${data.fat}g fat`);
+
+                    if (macros.length > 0) {
+                        responseText += ` It contains about ${macros.join(', ')}.`;
+                    }
+                }
                 // If health_tip is present and meaningful (not just 'Info ] '), append it
                 const healthTip = (data.health_tip && data.health_tip.length > 10) ? `\n\n💡 ${data.health_tip}` : '';
 

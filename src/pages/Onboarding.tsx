@@ -28,7 +28,20 @@ export default function Onboarding() {
     activityLevel: 'moderate' as ActivityLevel
   });
 
+
   const handleNext = () => {
+    // Validation
+    if (step === 1 && !formData.name.trim()) {
+      alert("Please enter your name.");
+      return;
+    }
+    if (step === 3) {
+      if (!formData.height || !formData.weight || !formData.birthDate || !formData.targetWeight) {
+        alert("Please fill in all body stats.");
+        return;
+      }
+    }
+
     if (step < 4) setStep(step + 1);
     else handleSubmit();
   };
