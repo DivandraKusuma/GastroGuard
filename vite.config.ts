@@ -58,7 +58,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'https://rantog-gastroguardbackend.hf.space',
+        target: 'https://gicax-gastroguard.hf.space',
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
