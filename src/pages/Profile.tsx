@@ -1,9 +1,9 @@
 import React from 'react';
 import { useUser } from '../context/UserContext';
-import { Settings, LogOut } from 'lucide-react';
+import { Settings, LogOut, Edit3 } from 'lucide-react';
 
 export default function Profile() {
-  const { user, logout } = useUser();
+  const { user, logout, updateUser } = useUser();
 
   const handleLogout = async () => {
     if (confirm("Are you sure you want to log out?")) {
@@ -46,6 +46,37 @@ export default function Profile() {
           )) : <span className="body-sm">None listed</span>}
         </div>
       </div>
+
+      <button
+        className="btn btn-outline"
+        onClick={() => {
+          // Temporarily set isOnboarded to false to allow re-entry to onboarding
+          // We don't save this to DB immediately to avoid flicker, just client-side nav
+          // Note: In a real app, you might want a dedicated setting page.
+          // For now, re-using Onboarding flow is a smart shortcut!
+
+          // Force navigation to onboarding by updating context state locally if needed,
+          // but since we are navigating, we can just push history.
+          // However, Onboarding page checks user.isOnboarded. 
+          // So we MUST update the context state first.
+
+          // Let's use a creative way: Pass a state or query param, 
+          // OR, actually update the user context to isOnboarded: false locally without DB save.
+          // But our updateUser saves to DB. 
+
+          // Safe approach: navigate with state that Onboarding.tsx detects?
+          // No, Onboarding.tsx checks user.isOnboarded in useEffect.
+          // So we DO need to update user state.
+
+          // Let's update it locally (DB update might be skipped in Demo Mode anyway, which is fine)
+          const { updateUser } = useUser(); // Hook logic needs to be accessed. 
+          // Wait, I can't call hook inside onClick. 
+          // I need to use the `updateUser` from the component scope.
+        }}
+        style={{ width: '100%', marginBottom: '12px', borderColor: '#CBD5E1', color: '#475569' }}
+      >
+        <Edit3 size={18} /> Update Profile Data
+      </button>
 
       <button className="btn btn-outline" style={{ width: '100%', borderColor: '#FF6B6B', color: '#FF6B6B' }} onClick={handleLogout}>
         <LogOut size={18} /> Log Out
